@@ -1,4 +1,5 @@
-import { getPostBySlug } from "../../../lib/posts";
+import Container from "@/components/Container";
+import { getPostBySlug } from "@/lib/posts";
 
 type Props = {
   params: Promise<{
@@ -7,24 +8,26 @@ type Props = {
 };
 
 export default async function PostPage({ params }: Props) {
-  const { slug } = await params; // ✅ unwrap params
-
-  if (!slug) {
-    return <div>Article not found</div>;
-  }
+  // ✅ REQUIRED in Next.js 16
+  const { slug } = await params;
 
   const post = await getPostBySlug(slug);
 
   return (
-    <main className="min-h-screen p-10">
-      <h1 className="text-3xl font-bold">{post.title}</h1>
-      <p className="text-sm text-gray-500 mt-2">{post.date}</p>
+    <Container>
+      <article className="prose prose-lg mt-10">
+        <h1>{post.title}</h1>
+        <p className="text-gray-500">{post.date}</p>
 
-      <article
-        className="prose mt-8"
-        dangerouslySetInnerHTML={{ __html: post.contentHtml }}
-      />
-    </main>
+        <div
+  className="prose prose-lg max-w-none"
+  dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+/>
+
+      </article>
+    </Container>
   );
 }
+
+
 
