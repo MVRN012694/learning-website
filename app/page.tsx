@@ -8,7 +8,7 @@ export default async function HomePage() {
   return (
     <Container>
       <h1 className="text-4xl font-bold mb-10">
-        My Daily Learning
+        Tech Insights Daily
       </h1>
 
       <div className="space-y-6">

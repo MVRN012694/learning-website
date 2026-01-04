@@ -1,7 +1,7 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "My Daily Learning Website",
+  title: "Tech Insights Daily",
   description: "Learn something new every day"
 };
 
