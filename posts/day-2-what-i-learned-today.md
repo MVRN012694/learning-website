@@ -1,5 +1,5 @@
 ---
-title: "Day 2 – What I Learned Today"
+title: "What I Learned Today"
 date: "2026-01-02"
 ---
 

@@ -2,32 +2,31 @@ import Container from "@/components/Container";
 import { getPostBySlug } from "@/lib/posts";
 
 type Props = {
-  params: Promise<{
-    slug: string;
-  }>;
+  params: Promise<{ slug: string }>;
 };
 
 export default async function PostPage({ params }: Props) {
-  // ✅ REQUIRED in Next.js 16
   const { slug } = await params;
-
   const post = await getPostBySlug(slug);
 
   return (
     <Container>
-      <article className="prose prose-lg mt-10">
-        <h1>{post.title}</h1>
-        <p className="text-gray-500">{post.date}</p>
+      <h1 className="text-4xl font-bold mb-2">
+        {post.title}
+      </h1>
 
-        <div
-  className="prose prose-lg max-w-none"
-  dangerouslySetInnerHTML={{ __html: post.contentHtml }}
-/>
+      <p className="text-gray-500 mb-8">
+        {post.date}
+      </p>
 
-      </article>
+      <div
+        className="prose prose-lg max-w-none"
+        dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+      />
     </Container>
   );
 }
+
 
 
 

@@ -1,5 +1,5 @@
 ---
-title: "Day 1: My First Learning Article"
+title: "My First Learning Article"
 date: "2026-01-01"
 ---
 
