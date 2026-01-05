@@ -1,24 +1,31 @@
-import Container from "@/components/Container";
-import PostCard from "@/components/PostCard";
-import { getAllPosts } from "@/lib/posts";
+import { siteConfig } from "@/lib/site-config";
 
-export default async function HomePage() {
-  const posts = getAllPosts();
-
+export default function HomePage() {
   return (
-    <Container>
-      <h1 className="text-4xl font-bold mb-10">
-        Tech Insights Daily
+    <main className="max-w-6xl mx-auto px-4 py-10">
+      <h1 className="text-4xl font-bold mb-4">
+        {siteConfig.name}
       </h1>
 
-      <div className="space-y-6">
-        {posts.map((post) => (
-          <PostCard key={post.slug} post={post} />
-        ))}
-      </div>
-    </Container>
+      <p className="text-lg text-gray-600 mb-6">
+        {siteConfig.description}
+      </p>
+
+      <p className="text-gray-700">
+        Our content is curated to help beginners build strong foundations,
+        professionals upskill with real-world practices, and job seekers
+        prepare confidently for interviews.
+      </p>
+    </main>
   );
 }
+
+
+
+
+
+
+
 
 
 

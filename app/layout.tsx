@@ -1,24 +1,32 @@
 import "./globals.css";
+import Navbar from "@/components/Navbar";
 
 export const metadata = {
-  title: "Tech Insights Daily",
-  description: "Learn something new every day"
+  title: "Daily Tech Insights",
+  description:
+    "Daily Tech Insights is your trusted learning hub for Cloud, DevOps, and modern IT technologies.",
 };
 
 export default function RootLayout({
-  children
+  children,
 }: {
   children: React.ReactNode;
 }) {
   return (
     <html lang="en">
-      <body className="bg-white text-gray-900 antialiased">
-        <main className="max-w-3xl mx-auto px-4 py-10">
+      <body>
+        <Navbar />
+        <main className="max-w-6xl mx-auto px-4 py-8">
           {children}
         </main>
       </body>
     </html>
   );
 }
+
+
+
+
+
 
 
