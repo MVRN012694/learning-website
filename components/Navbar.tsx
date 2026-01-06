@@ -1,22 +1,22 @@
 import Link from "next/link";
-import { siteConfig } from "@/lib/site-config";
 
 export default function Navbar() {
   return (
-    <header className="border-b bg-white">
-      <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-        {/* Brand */}
+    <header className="border-b">
+      <nav className="max-w-5xl mx-auto flex items-center justify-between px-4 py-4">
+        {/* Logo */}
         <Link href="/" className="text-xl font-bold">
-          {siteConfig.name}
+          Daily Tech Insights
         </Link>
 
-        {/* Navigation */}
-        <nav className="space-x-6 text-sm font-medium">
-          <Link href="/">Home</Link>
-          <Link href="/posts">Posts</Link>
-          <Link href="/about">About</Link>
-        </nav>
-      </div>
+        {/* Menu */}
+        <div className="space-x-6 text-sm font-medium">
+          <Link href="/" className="hover:underline">Home</Link>
+          <Link href="/posts" className="hover:underline">Posts</Link>
+          <Link href="/about" className="hover:underline">About</Link>
+        </div>
+      </nav>
     </header>
   );
 }
+

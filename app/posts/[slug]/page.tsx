@@ -1,12 +1,15 @@
 import { getPostBySlug } from "@/lib/posts";
-import ReactMarkdown from "react-markdown";
 
 type Props = {
-  params: Promise<{ slug: string }>;
+  params: Promise<{
+    slug: string;
+  }>;
 };
 
 export default async function PostPage({ params }: Props) {
+  // ✅ IMPORTANT FIX — unwrap params
   const { slug } = await params;
+
   const post = await getPostBySlug(slug);
 
   if (!post) {
@@ -14,10 +17,10 @@ export default async function PostPage({ params }: Props) {
   }
 
   return (
-    <article className="prose prose-lg mx-auto px-4 py-10">
-      <h1>{post.data.title}</h1>
+    <main className="px-4 py-10">
+      <article className="prose prose-lg mx-auto">
+        <h1>{post.data.title}</h1>
 
-      {post.data.date && (
         <p className="text-gray-500 text-sm">
           {new Date(post.data.date).toLocaleDateString("en-US", {
             year: "numeric",
@@ -25,20 +28,23 @@ export default async function PostPage({ params }: Props) {
             day: "numeric",
           })}
         </p>
-      )}
 
-      {post.data.image && (
-        <img
-          src={post.data.image}
-          alt={post.data.title}
-          className="rounded-lg my-6"
+        <div
+          dangerouslySetInnerHTML={{
+            __html: post.contentHtml,
+          }}
         />
-      )}
-
-      <ReactMarkdown>{post.content}</ReactMarkdown>
-    </article>
+      </article>
+    </main>
   );
 }
+
+
+
+
+
+
+
 
 
 

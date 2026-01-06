@@ -1,11 +1,6 @@
-/* globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Optional: add custom font */
-body {
-  font-family: "Inter", sans-serif;
-}
 
 

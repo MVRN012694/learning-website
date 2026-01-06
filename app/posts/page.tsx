@@ -1,55 +1,32 @@
-import Link from "next/link";
 import { getAllPosts } from "@/lib/posts";
+import Link from "next/link";
 
-export default async function PostsPage() {
-  const posts = await getAllPosts();
+export default function PostsPage() {
+  const posts = getAllPosts();
 
   return (
-    <main className="max-w-6xl mx-auto px-6 py-10">
-      <h1 className="text-4xl font-bold mb-8">Daily Tech Insights</h1>
+    <>
+      <h1 className="text-3xl font-bold mb-10">All Posts</h1>
 
-      <div className="grid gap-8 md:grid-cols-2">
+      <div className="space-y-10">
         {posts.map((post) => (
-          <Link
-            key={post.slug}
-            href={`/posts/${post.slug}`}
-            className="border rounded-xl overflow-hidden hover:shadow-lg transition"
-          >
-            {/* Image */}
-            {post.data.image && (
-              <img
-                src={post.data.image}
-                alt={post.data.title}
-                className="w-full h-56 object-cover"
-              />
-            )}
-
-            {/* Content */}
-            <div className="p-6">
-              <h2 className="text-2xl font-semibold mb-2">
+          <article key={post.slug}>
+            <Link href={`/posts/${post.slug}`}>
+              <h2 className="text-2xl font-semibold hover:underline">
                 {post.data.title}
               </h2>
-
-              {post.data.date && (
-                <p className="text-gray-500 text-sm mb-3">
-                  {new Date(post.data.date).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </p>
-              )}
-
-              <p className="text-gray-700">
-                {post.data.description || "Read more →"}
-              </p>
-            </div>
-          </Link>
+            </Link>
+            <p className="text-sm text-gray-500">
+              {new Date(post.data.date).toLocaleDateString()}
+            </p>
+          </article>
         ))}
       </div>
-    </main>
+    </>
   );
 }
+
+
 
 
 

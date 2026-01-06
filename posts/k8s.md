@@ -5,11 +5,14 @@ image: "/images/posts/k8s.png"
 description: "Kubernetes (K8s) automates container deployment, scaling, and management for modern cloud applications"
 ---
 
+![K8S Explained](/images/posts/k8s.png)
+
+# Kubernetes Architecture Explained
 Kubernetes is a powerful open-source platform designed for automating the deployment, scaling, and operation of application containers across clusters of hosts. It follows a client-server architecture and consists of several components that work together to manage containerized applications.
 
 ---
 
-Control Plane Components
+# Control Plane Components
 
 The Control Plane is responsible for maintaining the desired state of the cluster and managing the worker nodes. It consists of the following components:
 
@@ -23,7 +26,7 @@ kube-controller-manager: Runs various controllers that ensure the desired state 
 
 cloud-controller-manager: Integrates Kubernetes with cloud provider APIs, managing cloud-specific resources like instances, load balancers, and storage volumes. It contains controllers for node, route, and service management.
 
-Worker Node Components
+# Worker Node Components
 
 Worker nodes are responsible for running containerized applications. Each worker node includes the following components:
 
@@ -33,7 +36,7 @@ kube-proxy: A network proxy that runs on each node, implementing the Kubernetes 
 
 Container Runtime: The software component required to run containers. Kubernetes supports multiple container runtimes like containerd, CRI-O, and Docker, which are compliant with the Container Runtime Interface (CRI).
 
-Addon Components
+# Addon Components
 
 Kubernetes clusters often require additional components to be fully operational. Some popular addons include:
 
