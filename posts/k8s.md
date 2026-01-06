@@ -2,6 +2,7 @@
 title: "Kubernetes Architecture Explained"
 date: "2026-01-06"
 image: "/images/posts/k8s.png"
+description: "Kubernetes (K8s) automates container deployment, scaling, and management for modern cloud applications"
 ---
 
 Kubernetes is a powerful open-source platform designed for automating the deployment, scaling, and operation of application containers across clusters of hosts. It follows a client-server architecture and consists of several components that work together to manage containerized applications.

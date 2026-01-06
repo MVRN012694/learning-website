@@ -1,42 +1,47 @@
 import Link from "next/link";
-import Image from "next/image";
 import { getAllPosts } from "@/lib/posts";
 
 export default async function PostsPage() {
   const posts = await getAllPosts();
 
   return (
-    <main className="max-w-5xl mx-auto px-4 py-10">
-      <h1 className="text-3xl font-bold mb-8">Daily Tech Insights</h1>
+    <main className="max-w-6xl mx-auto px-6 py-10">
+      <h1 className="text-4xl font-bold mb-8">Daily Tech Insights</h1>
 
-      <div className="grid gap-8">
+      <div className="grid gap-8 md:grid-cols-2">
         {posts.map((post) => (
           <Link
             key={post.slug}
             href={`/posts/${post.slug}`}
-            className="flex gap-6 border rounded-lg p-4 hover:shadow-lg transition"
+            className="border rounded-xl overflow-hidden hover:shadow-lg transition"
           >
+            {/* Image */}
             {post.data.image && (
-              <Image
+              <img
                 src={post.data.image}
                 alt={post.data.title}
-                width={180}
-                height={120}
-                className="rounded object-cover"
+                className="w-full h-56 object-cover"
               />
             )}
 
-            <div>
-              <h2 className="text-xl font-semibold">
+            {/* Content */}
+            <div className="p-6">
+              <h2 className="text-2xl font-semibold mb-2">
                 {post.data.title}
               </h2>
 
-              <p className="text-gray-600 mt-1">
-                {post.data.description}
-              </p>
+              {post.data.date && (
+                <p className="text-gray-500 text-sm mb-3">
+                  {new Date(post.data.date).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </p>
+              )}
 
-              <p className="text-sm text-gray-400 mt-2">
-                {new Date(post.data.date).toDateString()}
+              <p className="text-gray-700">
+                {post.data.description || "Read more →"}
               </p>
             </div>
           </Link>
@@ -45,6 +50,7 @@ export default async function PostsPage() {
     </main>
   );
 }
+
 
 
 

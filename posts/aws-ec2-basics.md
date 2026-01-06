@@ -2,6 +2,7 @@
 title: "AWS EC2 Explained for Beginners"
 date: "2026-01-06"
 image: "/images/posts/aws-ec2.png"
+description: "A beginner-friendly guide to understanding AWS EC2 with real-world"
 ---
 
 ## What is AWS EC2?
