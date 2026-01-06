@@ -1,24 +1,24 @@
 import { getPostBySlug } from "@/lib/posts";
-import Container from "@/components/Container";
+import ReactMarkdown from "react-markdown";
 
-interface Props {
-  params: { slug: string } | Promise<{ slug: string }>;
-}
+type Props = {
+  params: Promise<{ slug: string }>;
+};
 
 export default async function PostPage({ params }: Props) {
-  const resolvedParams = await params;
-  const { slug } = resolvedParams;
-
-  if (!slug) return <div>Post not found</div>;
-
+  const { slug } = await params;
   const post = await getPostBySlug(slug);
-  if (!post || !post.data) return <div>Post not found</div>;
+
+  if (!post) {
+    return <div className="text-center mt-20">Post not found</div>;
+  }
 
   return (
-    <Container>
-      <h1 className="text-3xl font-bold mb-2">{post.data.title ?? "Untitled Post"}</h1>
+    <article className="prose prose-lg mx-auto px-4 py-10">
+      <h1>{post.data.title}</h1>
+
       {post.data.date && (
-        <p className="text-gray-500 text-sm mb-4">
+        <p className="text-gray-500 text-sm">
           {new Date(post.data.date).toLocaleDateString("en-US", {
             year: "numeric",
             month: "long",
@@ -26,20 +26,25 @@ export default async function PostPage({ params }: Props) {
           })}
         </p>
       )}
-      <div className="prose prose-lg" dangerouslySetInnerHTML={{ __html: post.content }} />
-    </Container>
+
+      {post.data.image && (
+        <img
+          src={post.data.image}
+          alt={post.data.title}
+          className="rounded-lg my-6"
+        />
+      )}
+
+      <ReactMarkdown>{post.content}</ReactMarkdown>
+    </article>
   );
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const post = await getPostBySlug(slug);
 
-  return {
-    title: post?.data?.title ?? "Article",
-    description: post?.data?.description ?? "Daily Tech Insights article",
-  };
-}
+
+
+
+
 
 
 

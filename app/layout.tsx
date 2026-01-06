@@ -1,5 +1,5 @@
 import "./globals.css";
-import Navbar from "@/components/Navbar";
+import Header from "@/components/Header";
 
 export const metadata = {
   title: "Daily Tech Insights",
@@ -14,15 +14,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <Navbar />
-        <main className="max-w-6xl mx-auto px-4 py-8">
+      <body className="bg-white text-gray-900">
+        <Header />
+        <main className="max-w-3xl mx-auto px-4 py-8">
           {children}
         </main>
       </body>
     </html>
   );
 }
+
+
 
 
 

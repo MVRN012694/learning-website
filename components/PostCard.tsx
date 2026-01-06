@@ -1,17 +1,22 @@
 import Link from "next/link";
 
-interface PostCardProps {
-  slug: string;
+type Props = {
   title: string;
   date: string;
-}
+  excerpt: string;
+  slug: string;
+};
 
-export default function PostCard({ slug, title, date }: PostCardProps) {
+export default function PostCard({ title, date, excerpt, slug }: Props) {
   return (
-    <Link href={`/posts/${slug}`} className="block p-4 border rounded hover:shadow-lg transition">
-      <h2 className="text-xl font-bold">{title}</h2>
-      <p className="text-gray-500 text-sm">{new Date(date).toLocaleDateString()}</p>
+    <Link href={`/posts/${slug}`}>
+      <article className="border rounded-lg p-5 hover:shadow-md transition mb-6">
+        <h2 className="text-xl font-semibold mb-1">{title}</h2>
+        <p className="text-sm text-gray-500 mb-2">{date}</p>
+        <p className="text-gray-700">{excerpt}</p>
+      </article>
     </Link>
   );
 }
+
 
