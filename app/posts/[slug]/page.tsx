@@ -1,15 +1,13 @@
 import { getPostBySlug } from "@/lib/posts";
 
-type Props = {
+interface Props {
   params: Promise<{
     slug: string;
   }>;
-};
+}
 
 export default async function PostPage({ params }: Props) {
-  // ✅ IMPORTANT FIX — unwrap params
-  const { slug } = await params;
-
+  const { slug } = await params; // ✅ IMPORTANT
   const post = await getPostBySlug(slug);
 
   if (!post) {
@@ -17,27 +15,29 @@ export default async function PostPage({ params }: Props) {
   }
 
   return (
-    <main className="px-4 py-10">
-      <article className="prose prose-lg mx-auto">
-        <h1>{post.data.title}</h1>
+    <main className="max-w-3xl mx-auto px-4 py-10">
+      <article>
+        <h1 className="text-4xl font-bold mb-2">
+          {post.data.title}
+        </h1>
 
-        <p className="text-gray-500 text-sm">
-          {new Date(post.data.date).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
+        <p className="text-gray-500 mb-6">
+          {post.data.date}
         </p>
 
         <div
-          dangerouslySetInnerHTML={{
-            __html: post.contentHtml,
-          }}
-        />
+  className="prose prose-lg"
+  dangerouslySetInnerHTML={{
+    __html: post.contentHtml,
+  }}
+/>
+
       </article>
     </main>
   );
 }
+
+
 
 
 

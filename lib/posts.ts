@@ -6,6 +6,9 @@ import html from "remark-html";
 
 const postsDirectory = path.join(process.cwd(), "posts");
 
+/* =========================
+   GET ALL POSTS (Homepage)
+========================= */
 export function getAllPosts() {
   const fileNames = fs.readdirSync(postsDirectory);
 
@@ -14,20 +17,24 @@ export function getAllPosts() {
     const fullPath = path.join(postsDirectory, fileName);
     const fileContents = fs.readFileSync(fullPath, "utf8");
 
-    const { data, content } = matter(fileContents);
+    const { data } = matter(fileContents);
 
     return {
       slug,
       data: {
-        ...data,
+        title: data.title ?? "Untitled",
         date: String(data.date),
       },
-      content,
     };
   });
 }
 
+/* =========================
+   GET SINGLE POST
+========================= */
 export async function getPostBySlug(slug: string) {
+  if (!slug) throw new Error("Slug is undefined");
+
   const fullPath = path.join(postsDirectory, `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
 
@@ -40,12 +47,15 @@ export async function getPostBySlug(slug: string) {
   return {
     slug,
     data: {
-      ...data,
+      title: data.title ?? "Untitled",
       date: String(data.date),
     },
     contentHtml: processedContent.toString(),
   };
 }
+
+
+
 
 
 
